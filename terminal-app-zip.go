@@ -1,4 +1,4 @@
-package gosxnotifier
+package notifier
 
 import (
 	"archive/zip"
@@ -12,9 +12,8 @@ import (
 )
 
 const (
-	zipPath        = "terminal-notifier.temp.zip"
-	executablePath = "terminal-notifier.app/Contents/MacOS/terminal-notifier"
-	tempDirSuffix  = "gosxnotifier"
+	executablePath = "notifier.app/Contents/MacOS/notifier"
+	tempDirSuffix  = "notifier"
 )
 
 var (
@@ -26,7 +25,7 @@ func supportedOS() bool {
 	if runtime.GOOS == "darwin" {
 		return true
 	} else {
-		log.Print("OS does not support terminal-notifier")
+		log.Print("OS does not support notifier")
 		return false
 	}
 }
@@ -35,7 +34,7 @@ func init() {
 	if supportedOS() {
 		err := installTerminalNotifier()
 		if err != nil {
-			log.Fatalf("Could not install Terminal Notifier to a temp directory: %s", err)
+			log.Fatalf("Could not install notifier to a temp directory: %s", err)
 		} else {
 			FinalPath = filepath.Join(rootPath, executablePath)
 		}
@@ -52,23 +51,27 @@ func exists(file string) bool {
 func installTerminalNotifier() error {
 	rootPath = filepath.Join(os.TempDir(), tempDirSuffix)
 
-	//if terminal-notifier.app already installed no-need to re-install
+	//if notifier.app already installed no-need to re-install
 	if exists(filepath.Join(rootPath, executablePath)) {
 		return nil
 	}
-	buf := bytes.NewReader(terminalnotifier())
+	zd, err := osx_notifier_app_zip()
+	if err != nil {
+		return err
+	}
+	buf := bytes.NewReader(zd)
 	reader, err := zip.NewReader(buf, int64(buf.Len()))
 	if err != nil {
 		return err
 	}
 	err = unpackZip(reader, rootPath)
 	if err != nil {
-		return fmt.Errorf("could not unpack zip terminal-notifier file: %s", err)
+		return fmt.Errorf("could not unpack zip notifier file: %s", err)
 	}
 
 	err = os.Chmod(filepath.Join(rootPath, executablePath), 0755)
 	if err != nil {
-		return fmt.Errorf("could not make terminal-notifier executable: %s", err)
+		return fmt.Errorf("could not make notifier executable: %s", err)
 	}
 
 	return nil

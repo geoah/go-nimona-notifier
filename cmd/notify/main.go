@@ -5,13 +5,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/deckarep/gosx-notifier"
+	"github.com/geoah/go-nimona-notifier"
 )
 
 func main() {
 	notification := strings.Join(os.Args[1:], " ")
 
-	note := gosxnotifier.NewNotification(notification)
+	note := notifier.NewNotification(notification)
 
 	note.Title = "Notify"
 

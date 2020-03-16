@@ -1,4 +1,4 @@
-package gosxnotifier
+package notifier
 
 import (
 	"errors"
@@ -11,21 +11,21 @@ import (
 type Sound string
 
 const (
-	Default Sound = "'default'"
-	Basso   Sound = "Basso"
-	Blow    Sound = "Blow"
-	Bottle  Sound = "Bottle"
-	Frog    Sound = "Frog"
-	Funk    Sound = "Funk"
-	Glass   Sound = "Glass"
-	Hero    Sound = "Hero"
-	Morse   Sound = "Morse"
-	Ping    Sound = "Ping"
-	Pop     Sound = "Pop"
-	Purr    Sound = "Purr"
-	Sosumi  Sound = "Sosumi"
-	Submarine  Sound = "Submarine"
-	Tink       Sound = "Tink"	
+	Default   Sound = "'default'"
+	Basso     Sound = "Basso"
+	Blow      Sound = "Blow"
+	Bottle    Sound = "Bottle"
+	Frog      Sound = "Frog"
+	Funk      Sound = "Funk"
+	Glass     Sound = "Glass"
+	Hero      Sound = "Hero"
+	Morse     Sound = "Morse"
+	Ping      Sound = "Ping"
+	Pop       Sound = "Pop"
+	Purr      Sound = "Purr"
+	Sosumi    Sound = "Sosumi"
+	Submarine Sound = "Submarine"
+	Tink      Sound = "Tink"
 )
 
 type Notification struct {

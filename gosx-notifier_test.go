@@ -1,4 +1,4 @@
-package gosxnotifier
+package notifier
 
 import (
 	"log"
@@ -10,9 +10,9 @@ func Test_Install(t *testing.T) {
 	//assert file exists
 
 	if !exists(FinalPath) {
-		t.Error("Test_Install failed to install the terminal-notifier.app bundle")
+		t.Error("Test_Install failed to install the notifier.app bundle")
 	} else {
-		log.Println("terminal-notifier.app bundle installed successfully at: ", FinalPath)
+		log.Println("notifier.app bundle installed successfully at: ", FinalPath)
 	}
 }
 
@@ -72,7 +72,7 @@ func Test_Sender(t *testing.T) {
 }
 
 func Test_Group(t *testing.T) {
-	const app_id string = "github.com/deckarep/gosx-notifier"
+	const app_id string = "github.com/geoah/go-nimona-notifier"
 
 	for i := 0; i < 3; i++ {
 		n := NewNotification("Testing Group Functionality...")

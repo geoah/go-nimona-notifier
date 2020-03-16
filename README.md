@@ -1,9 +1,14 @@
-gosx-notifier
+go-nimona-notifier
 ===========================
+
+WARNING: This is a fork of the original [gosx-notifier](https://github.com/deckarep/gosx-notifier) library with a re-signed terminal-notifier app and an updated icon for use with a number of nimona desktop apps. I would suggest against using this fork for a while.
+
+---
+
 A [Go](http://golang.org) lib for sending desktop notifications to OSX Mountain Lion's (10.8 or higher REQUIRED)
 [Notification Center](http://www.macworld.com/article/1165411/mountain_lion_hands_on_with_notification_center.html).
 
-[![GoDoc](http://godoc.org/github.com/deckarep/gosx-notifier?status.png)](http://godoc.org/github.com/deckarep/gosx-notifier)
+[![GoDoc](http://godoc.org/github.com/geoah/go-nimona-notifier?status.png)](http://godoc.org/github.com/geoah/go-nimona-notifier)
 
 Update 4/3/2014
 ------
@@ -16,13 +21,13 @@ OSX Mountain Lion comes packaged with a built-in notification center. For whatev
 notification center API](http://forums.macrumors.com/showthread.php?t=1403807) to apps hosted in its App Store. The end
 result? A potentially useful API shackled to Apple's ecosystem.
 
-Thankfully, [Eloy Durán](https://github.com/alloy) put together [an osx app](https://github.com/alloy/terminal-notifier) that allows terminal access to the sandboxed API. **gosx-notifier** embeds this app with a simple interface to the closed API.
+Thankfully, [Eloy Durán](https://github.com/alloy) put together [an osx app](https://github.com/alloy/notifier) that allows terminal access to the sandboxed API. **gosx-notifier** embeds this app with a simple interface to the closed API.
 
 It's not perfect, and the implementor will quickly notice its limitations. However, it's a start and any pull requests are accepted and encouraged!
 
 Dependencies:
 -------------
-There are none! If you utilize this package and create a binary executable it will auto-magically install the terminal-notifier component into a temp directory of the server.  This is possible because in this latest version the terminal-notifier binary is now statically embedded into the Go source files.
+There are none! If you utilize this package and create a binary executable it will auto-magically install the notifier component into a temp directory of the server.  This is possible because in this latest version the notifier binary is now statically embedded into the Go source files.
 
 
 Installation and Requirements
@@ -30,7 +35,7 @@ Installation and Requirements
 The following command will install the notification api for Go along with the binaries.  Also, utilizing this lib requires OSX 10.8 or higher. It will simply not work on lower versions of OSX.
 
 ```sh
-go get github.com/deckarep/gosx-notifier
+go get github.com/geoah/go-nimona-notifier
 ```
 
 Using the Command Line
@@ -53,13 +58,13 @@ It's a pretty straightforward API:
 package main
 
 import (
-    "github.com/deckarep/gosx-notifier"
+    "github.com/geoah/go-nimona-notifier"
     "log"
 )
 
 func main() {
     //At a minimum specifiy a message to display to end-user.
-    note := gosxnotifier.NewNotification("Check your Apple Stock!")
+    note := notifier.NewNotification("Check your Apple Stock!")
 
     //Optionally, set a title
     note.Title = "It's money making time 💰"
@@ -68,7 +73,7 @@ func main() {
     note.Subtitle = "My subtitle"
 
     //Optionally, set a sound from a predefined set.
-    note.Sound = gosxnotifier.Basso
+    note.Sound = notifier.Basso
 
     //Optionally, set a group which ensures only one notification is ever shown replacing previous notification of same group id.
     note.Group = "com.unique.yourapp.identifier"
@@ -101,7 +106,7 @@ Sample App: Desktop Pinger Notification - monitors your websites and will notifi
 package main
 
 import (
-	"github.com/deckarep/gosx-notifier"
+	"github.com/geoah/go-nimona-notifier"
 	"net/http"
 	"strings"
 	"time"
@@ -133,9 +138,9 @@ func main() {
 
 func showNotification(message string) {
 
-	note := gosxnotifier.NewNotification(message)
+	note := notifier.NewNotification(message)
 	note.Title = "Site Down"
-	note.Sound = gosxnotifier.Default
+	note.Sound = notifier.Default
 
 	note.Push()
 }
@@ -173,7 +178,7 @@ Coming Soon
 
 Licence
 -------
-This project is dual licensed under [any licensing defined by the underlying apps](https://github.com/alloy/terminal-notifier) and MIT licensed for this version written in Go.
+This project is dual licensed under [any licensing defined by the underlying apps](https://github.com/alloy/notifier) and MIT licensed for this version written in Go.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/deckarep/gosx-notifier/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
