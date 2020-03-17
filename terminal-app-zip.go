@@ -13,7 +13,7 @@ import (
 
 const (
 	executablePath = "notifier.app/Contents/MacOS/notifier"
-	tempDirSuffix  = "notifier"
+	tempDirSuffix  = "notifier-v2.0.0"
 )
 
 var (
