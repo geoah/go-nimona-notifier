@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	executablePath = "notifier.app/Contents/MacOS/notifier"
-	tempDirSuffix  = "notifier-v1.6.3"
+	executablePath = "notifier.app/Contents/MacOS/terminal-notifier"
+	tempDirSuffix  = "notifier-v1.7.0"
 )
 
 var (
@@ -24,10 +24,9 @@ var (
 func supportedOS() bool {
 	if runtime.GOOS == "darwin" {
 		return true
-	} else {
-		log.Print("OS does not support notifier")
-		return false
 	}
+	log.Print("OS does not support notifier")
+	return false
 }
 
 func init() {

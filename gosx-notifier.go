@@ -2,7 +2,7 @@ package notifier
 
 import (
 	"errors"
-	"net/url"
+	"fmt"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -97,30 +97,30 @@ func (n *Notification) Push() error {
 			commandTuples = append(commandTuples, []string{"-contentImage", img}...)
 		}
 
-		//add url if specified
-		url, err := url.Parse(n.Link)
-		if err != nil {
-			n.Link = ""
-		}
-		if url != nil && n.Link != "" {
-			commandTuples = append(commandTuples, []string{"-open", n.Link}...)
-		}
+		// //add url if specified
+		// url, err := url.Parse(n.Link)
+		// if err != nil {
+		// 	n.Link = ""
+		// }
+		// if url != nil && n.Link != "" {
+		// 	commandTuples = append(commandTuples, []string{"-open", n.Link}...)
+		// }
 
 		//add bundle id if specified
-		if strings.HasPrefix(strings.ToLower(n.Link), "com.") {
+		if strings.HasPrefix(strings.ToLower(n.Link), "io.") {
 			commandTuples = append(commandTuples, []string{"-activate", n.Link}...)
 		}
 
 		//add sender if specified
-		if strings.HasPrefix(strings.ToLower(n.Sender), "com.") {
+		if strings.HasPrefix(strings.ToLower(n.Sender), "io.") {
 			commandTuples = append(commandTuples, []string{"-sender", n.Sender}...)
 		}
 
 		if len(commandTuples) == 0 {
 			return errors.New("Please provide a Message and Type at a minimum.")
 		}
-
-		_, err = exec.Command(FinalPath, commandTuples...).Output()
+		fmt.Println(FinalPath, commandTuples)
+		_, err := exec.Command(FinalPath, commandTuples...).Output()
 		if err != nil {
 			return err
 		}
